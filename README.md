@@ -1,0 +1,1 @@
+# Implicit Graph Search for Planning on Graphs of Convex Sets

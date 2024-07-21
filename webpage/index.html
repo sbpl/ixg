@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="IxG.">
+  <meta name="keywords" content="Graph of Convex Sets, GCS, Motion Planning, Graph Search, Robotics">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>INSATxGCS (IxG): Implicit Graph Search for Planning on Graphs of Convex Sets</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script> -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/atlas.ico">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+
+<body>
+  <!-- 
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      <a class="navbar-item" href="https://keunhong.com">
+      <span class="icon">
+          <i class="fas fa-home"></i>
+      </span>
+      </a>
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          More Research
+        </a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item" href="https://hypernerf.github.io">
+            HyperNeRF
+          </a>
+          <a class="navbar-item" href="https://nerfies.github.io">
+            Nerfies
+          </a>
+          <a class="navbar-item" href="https://latentfusion.github.io">
+            LatentFusion
+          </a>
+          <a class="navbar-item" href="https://photoshape.github.io">
+            PhotoShape
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</nav> -->
+
+
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">INSATxGCS (IxG): Implicit Graph Search for Planning on Graphs of
+              Convex Sets</h1>
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">
+                <a href="https://www.cs.cmu.edu/~rnataraj/">Ramkumar Natarajan</a><sup>1</sup>,</span>
+              <span class="author-block">
+                <a href="https://chaoqi-liu.com/">Chaoqi Liu</a><sup>2</sup>,</span>
+              <span class="author-block">
+                <a href="https://www.cs.cmu.edu/~choset/">Howie Choset</a><sup>1</sup>,
+              </span>
+              <span class="author-block">
+                <a href="https://www.cs.cmu.edu/~maxim/">Maxim Likhachev</a><sup>1</sup>,
+              </span>
+            </div>
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block"><sup>1</sup>The Robotics Institute, Carnegie Mellon University</span>
+              <span class="author-block"><sup>2</sup>University of Illinois Urbana-Champaign</span>
+            </div>
+
+            <div class="column has-text-centered">
+              <div class="publication-links">
+                <!-- PDF Link. -->
+                <span class="link-block">
+                  <a href="https://arxiv.org/pdf/2011.12948" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                    </span>
+                    <span>Paper</span>
+                  </a>
+                </span>
+                <span class="link-block">
+                  <a href="https://arxiv.org/abs/2011.12948" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                    </span>
+                    <span>arXiv</span>
+                  </a>
+                </span>
+                <!-- Video Link. -->
+                <span class="link-block">
+                  <a href="https://www.youtube.com/watch?v=MrKrnHhk8IA"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                    </span>
+                    <span>Video</span>
+                  </a>
+                </span>
+                <!-- Code Link. -->
+                <span class="link-block">
+                  <a href="https://github.com/google/nerfies" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-github"></i>
+                    </span>
+                    <span>Code</span>
+                  </a>
+                </span>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <!-- Abstract. -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Abstract</h2>
+          <div class="content has-text-justified">
+            <p>
+              Graphs of Convex Sets (GCS) is a recent motion planning and decision-making framework. To plan on GCS one
+              must solve a Mixed Integer Convex Program (MICP). GCS-Opt proposed a tight relaxation to solve this MICP
+              efficiently. Despite this, GCS-Opt for robot motion planning may contain millions of constraints and
+              therefore can be slow. Motivated by the observation that the trajectory solution lies only on a fraction
+              of the set of convex sets, we present two implicit graph search methods for planning on the graph of
+              convex sets called INSATxGCS (IxG) and IxG*. INterleaved Search And Trajectory optimization (INSAT) is a
+              previously developed algorithm that alternates between searching on a graph and optimizing partial paths
+              to find a smooth trajectory. By using an implicit graph search method INSAT on the graph of convex sets,
+              we achieve faster planning while ensuring stronger guarantees on completeness and optimality.
+            </p>
+          </div>
+        </div>
+      </div>
+      <!-- Abstract. -->
+
+    </div>
+  </section>
+
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <!-- GCS -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Graphs of Convex Sets (GCS)</h2>
+          <div class="content has-text-justified">
+            <p>
+              say something
+            </p>
+          </div>
+        </div>
+      </div>
+      <!-- GCS -->
+
+      <!-- GCS-Opt -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">GCS-Opt</h2>
+          <div class="content has-text-justified">
+            <p>
+              say something
+            </p>
+          </div>
+        </div>
+      </div>
+      <!-- GCS-Opt -->
+
+      <!-- GCS underutilized -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Why not GCS-Opt for GCS?</h2>
+          <div class="content has-text-justified">
+            <p>
+              say something
+            </p>
+          </div>
+        </div>
+      </div>
+      <!-- GCS underutilized -->
+    </div>
+  </section>
+
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <!-- IxG -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">IxG</h2>
+          <div class="content has-text-justified">
+            <p>
+              say something
+            </p>
+          </div>
+        </div>
+      </div>
+      <!-- IxG -->
+
+      <!-- IxG vs GCS-Opt -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">IxG vs GCS-Opt</h2>
+          <div class="content has-text-justified">
+            <p>
+              say something
+            </p>
+          </div>
+        </div>
+      </div>
+      <!-- IxG vs GCS-Opt -->
+
+      <!-- IxG* -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">IxG* - optimal variant of IxG</h2>
+          <div class="content has-text-justified">
+            <p>
+              say something
+            </p>
+          </div>
+        </div>
+      </div>
+      <!-- IxG* -->
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <!-- Results -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Results</h2>
+          <div class="content has-text-justified">
+            <p>
+              say something
+            </p>
+          </div>
+        </div>
+      </div>
+      <!-- Results -->
+    </div>
+  </section>
+
+
+  <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <h2 class="title">BibTeX</h2>
+      <pre><code>@article{natarajan2024ixg,
+  author    = {Natarajan, Ramkumar and Liu, Chaoqi and Choset, Howie and Likhachev, Maxim},
+  title     = {Implicit Graph Search for Planning on Graphs of Convex Sets},
+  journal   = {Robotics: Science and Systems (RSS)},
+  year      = {2024},
+}</code></pre>
+    </div>
+  </section>
+
+
+  <footer class="footer">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-8">
+          <div class="content">
+            <p>
+              Website template borrowed from <a href="https://github.com/nerfies/nerfies.github.io">NeRFies</a>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+
+</html>
